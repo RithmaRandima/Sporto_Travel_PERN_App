@@ -166,3 +166,20 @@ export const serviceBottomBoxData = [
             Lorem, ipsum. consectetur.`,
   },
 ];
+
+// {
+//   id: 1,
+//   title: "Surfing With Waves",
+//   sport: "Surfing",
+//   location: "Arugam Bay",
+//   country: "Sri Lanka",
+//   duration_days: 12,
+//   price: 200,
+//   max_participants: 12,
+//   image_url: "...",
+//   description: "...",
+//   difficulty: "Beginner",
+//   season: "May - September",
+//   rating: 4.8,
+//   created_at: "2026-05-31"
+// }
