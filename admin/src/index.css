@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+.nav-logo p {
+  font-weight: 900;
+  font-size: 30px;
+  text-shadow: 1px 1px 5px black;
+  color: #fff;
+}
+.nav-logo p span {
+  font-size: 36px;
+  color: #ff007b;
+  font-weight: 700;
+  text-shadow: 1px 1px 3px black;
+}
