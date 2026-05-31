@@ -12,24 +12,28 @@ export const getAllTravels = async (req, res) => {
       .status(200)
       .json({ success: true, message: "Fetched all Data", data: travels });
   } catch (error) {
-    console.llog("Error getAllTravels", error);
+    console.log("Error getAllTravels", error);
     res.status(400).json({ success: false, message: "Internal Server Error" });
   }
 };
 
 // single product
-export const getTravel = (req, res) => {
+export const getTravel = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const travel = sql`
+    const travel = await sql`
     SELECT * FROM products WHERE id=${id}`;
 
+    if (travel.length === 0) {
+      res.status(404).json({ success: false, message: "Travel not found" });
+    }
+
     res
-      .status(201)
-      .json({ success: true, message: "Travel fetched", data: newTravel[0] });
+      .status(200)
+      .json({ success: true, message: "Travel fetched", data: travel[0] });
   } catch (error) {
-    console.llog("Error getTravel", error);
+    console.log("Error getTravel", error);
     res.status(400).json({ success: false, message: "Internal Server Error" });
   }
 };
@@ -54,44 +58,50 @@ export const createTravel = async (req, res) => {
       .status(201)
       .json({ success: true, message: "New Travel added", data: newTravel[0] });
   } catch (error) {
-    console.llog("Error createTravel", error);
+    console.log("Error createTravel", error);
     res.status(400).json({ success: false, message: "Internal Server Error" });
   }
 };
 
 // update Travels
-export const updateTravel = (req, res) => {
+export const updateTravel = async (req, res) => {
   const { id } = req.params;
   const { name, image, price } = req.body;
 
   try {
-    const updateTravel = sql`
+    const updateTravel = await sql`
     UPDATE products SET name=${name}, price=${price}, image=${image} WHERE id=${id} RETURNING *`;
 
-    if ((updateTravel, length === 0)) {
-      res.status(404).json({ success: false, message: "Travel npt found" });
+    if (updateTravel.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Travel not found",
+      });
     }
     res.status(201).json({
       success: true,
-      message: "Travel fetched",
+      message: "Travel Updated",
       data: updateTravel[0],
     });
   } catch (error) {
-    console.llog("Error in updateTravel", error);
+    console.log("Error in updateTravel", error);
     res.status(400).json({ success: false, message: "Internal Server Error" });
   }
 };
 
 // delete Treavel
-export const deleteTravel = (req, res) => {
+export const deleteTravel = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const deleteTravel = sql`
+    const deleteTravel = await sql`
     DELETE FROM products WHERE id=${id} RETURNING *`;
 
-    if ((deleteTravel, length === 0)) {
-      res.status(404).json({ success: false, message: "Travel not found" });
+    if (deleteTravel.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "Travel not found",
+      });
     }
 
     res.status(200).json({
@@ -100,7 +110,7 @@ export const deleteTravel = (req, res) => {
       data: deleteTravel[0],
     });
   } catch (error) {
-    console.llog("Error deleteTravel", error);
+    console.log("Error deleteTravel", error);
     res.status(400).json({ success: false, message: "Internal Server Error" });
   }
 };

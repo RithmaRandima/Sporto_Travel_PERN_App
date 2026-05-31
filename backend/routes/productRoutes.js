@@ -7,12 +7,12 @@ import {
   updateTravel,
 } from "../controllers/productControllers.js";
 
-const router = express();
+const router = express.Router();
 
 router.get("/", getAllTravels);
 router.get("/:id", getTravel);
 router.post("/create", createTravel);
-router.put("/travels/:id", updateTravel);
-router.delete("/travels/:id", deleteTravel);
+router.put("/:id", updateTravel);
+router.delete("/:id", deleteTravel);
 
 export default router;
