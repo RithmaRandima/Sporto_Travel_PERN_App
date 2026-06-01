@@ -24,13 +24,14 @@ const About = () => {
 
         {/* TEXT SECTION */}
         <div className="flex flex-col items-center text-center md:items-start justify-center h-[55vh] md:text-left px-7 w-[100%] md:w-[700px] ">
-          {/* <p className="sub-title text-[15px] md:text-[30px] mb-3">
-            Dream Vacation Destination
-          </p> */}
-          <h1 className="font-extrabold text-[32px] md:text-[50px] mb-2">
+          <p className="text-red-400 uppercase tracking-[6px] text-sm mb-2">
+            Sports Travel Experience
+          </p>
+
+          <h1 className="font-extrabold text-[34px] md:text-[56px] leading-tight mb-6">
             Plan the Trip of <br /> a Lifetime with Ease
           </h1>
-          <p className="leading-8 text-[16px] md:text-[19px] mb-3">
+          <p className="text-gray-600 text-[16px] md:text-[18px] leading-8">
             Whether you're looking for a romantic getaway, a family-friendly
             adventure, or a solo journey to explore the world, a travel agency
             can provide you with a custom-tailored itinerary that exceeds your

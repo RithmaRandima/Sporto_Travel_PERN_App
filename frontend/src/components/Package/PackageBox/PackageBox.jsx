@@ -3,21 +3,33 @@ import "./PackageBox.css";
 
 const PackageBox = (props) => {
   return (
-    <div className="package-box w-[85%] md:w-[95%] h-[400px] shadow-2xl shadow-black/20  hover:scale-105 duration-300 m-2 mx-auto relative">
-      <div className="absolute w-[100%] h-[100%] ">
-        <img
-          src={props.img}
-          className="w-[100%] h-[100%] object-cover"
-          alt=""
-        />
-      </div>
-      <div className="absolute w-[100%] h-[100%] bg-gradient-to-t from-black/60 to-transparent"></div>
-      <div className=" destination-box-info absolute left-[50%] top-[65%]  translate-x-[-50%] w-full">
-        <h1 className="text-[20px] text-white font-bold mb-3">{props.city}</h1>
-        <p className="mb-3 text-white w-[70%] mx-auto">{props.desc}</p>
-        <button className="hidden text-[10px] cursor-pointer  hover:bg-black hover:scale-110 duration-300">
-          All Packages
-        </button>
+    <div className="group relative w-[85%] md:w-[95%] h-[400px] mx-auto overflow-hidden rounded-[18px] shadow-md hover:shadow-xl transition-all duration-500">
+      {/* IMAGE */}
+      <img
+        src={props.img}
+        className="absolute inset-0 w-full h-full object-cover scale-100 group-hover:scale-[1.03] transition duration-700"
+        alt=""
+      />
+
+      {/* SIMPLE DARK OVERLAY */}
+      <div className="absolute inset-0 bg-black/50 group-hover:bg-black/60 transition duration-500" />
+
+      {/* CONTENT */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] text-center text-white">
+        <h1 className="text-[20px] md:text-[22px] font-semibold tracking-wide mb-2">
+          {props.city}
+        </h1>
+
+        <p className="text-[13px] md:text-[14px] text-white/80 leading-5 mb-4">
+          {props.desc}
+        </p>
+
+        {/* subtle CTA */}
+        <div className="opacity-0 group-hover:opacity-100 transition duration-300">
+          <button className="text-[12px] px-4 py-1.5 border border-white/40 rounded-full hover:bg-white hover:text-black transition">
+            View Details
+          </button>
+        </div>
       </div>
     </div>
   );

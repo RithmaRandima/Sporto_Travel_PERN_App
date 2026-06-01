@@ -9,18 +9,22 @@ import { heroLeftBig } from "../../Data/HeroImages";
 
 const NewsLetter = () => {
   return (
-    <div className="md:pt-3  h-[90vh] md:h-[100vh] w-[100%] grid grid-cols-1 md:grid-cols-2 place-items-center">
-      {/* IMAGE SLIDER (REPLACED SLICK) */}
+    <div className="relative md:pt-3 h-[90vh] md:h-[100vh] w-[100%] grid grid-cols-1 md:grid-cols-2 place-items-center overflow-hidden bg-white">
+      {/* background glow */}
+      <div className="absolute top-[-200px] right-[-200px] w-[500px] h-[500px] bg-red-500/10 blur-[150px]" />
+      <div className="absolute bottom-[-200px] left-[-200px] w-[500px] h-[500px] bg-black/10 blur-[150px]" />
+
+      {/* IMAGE SLIDER */}
       <motion.div
-        initial={{ x: -500 }}
-        whileInView={{ x: 0 }}
+        initial={{ x: -200, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
         transition={{
           type: "spring",
-          stiffness: 200,
-          damping: 100,
+          stiffness: 120,
+          damping: 20,
           delay: 0.1,
         }}
-        className="hidden md:block w-[430px] h-[480px]"
+        className="hidden md:block w-[430px] h-[500px] rounded-[30px] overflow-hidden shadow-2xl"
       >
         <Swiper
           modules={[Autoplay]}
@@ -34,7 +38,7 @@ const NewsLetter = () => {
             <SwiperSlide key={index}>
               <img
                 src={img}
-                className="w-full h-[480px] object-cover"
+                className="w-full h-[500px] object-cover scale-105 hover:scale-110 transition duration-700"
                 alt=""
                 loading="lazy"
               />
@@ -44,38 +48,36 @@ const NewsLetter = () => {
       </motion.div>
 
       {/* TEXT CONTENT */}
-      <div className="p-6 pt-0 md:mt-6 block">
-        <div className="flex items-start flex-col text-left">
-          <p className="sub-title text-[#f00] text-[17px] md:text-[22px] mb-3">
-            Adventure Travel
-          </p>
+      <div className="p-6 md:mt-6 relative z-10 max-w-xl">
+        <p className="text-red-500 uppercase tracking-[6px] text-[14px] md:text-[16px] mb-4">
+          Adventure Travel
+        </p>
 
-          <h1 className="font-bold text-[32px] md:text-[37px] mb-2">
-            Embrace the Thrill of <br /> the Unknown
-          </h1>
+        <h1 className="font-extrabold text-[34px] md:text-[46px] leading-tight mb-6">
+          Embrace the Thrill of <br /> the Unknown
+        </h1>
 
-          <p className="leading-7 text-[20px] text-gray-700 mb-3">
-            Are you tired of the typical tourist destinations and looking to
-            step out of your comfort zone? Adventure travel may be the perfect
-            solution for you! Here are four reasons why you should book an
-            adventure travel experience :
-          </p>
-        </div>
+        <p className="leading-8 text-[16px] md:text-[18px] text-gray-600 mb-8">
+          Break away from ordinary tourism. Discover adventure-packed journeys,
+          explore untouched nature, experience cultures deeply, and create
+          unforgettable memories that last forever.
+        </p>
 
-        <div>
-          <div className="border-b border-black/70 flex py-5 ">
-            <TiTick className="text-[22px] mr-3" />
-            <p>Connect with nature</p>
+        {/* CHECKLIST */}
+        <div className="space-y-4">
+          <div className="flex items-center gap-3 bg-white shadow-md rounded-xl px-4 py-3 hover:shadow-lg transition">
+            <TiTick className="text-red-500 text-[22px]" />
+            <p className="text-gray-700">Connect with nature</p>
           </div>
 
-          <div className="border-b border-black/70 flex py-5 ">
-            <TiTick className="text-[22px] mr-3" />
-            <p>Experience other cultures</p>
+          <div className="flex items-center gap-3 bg-white shadow-md rounded-xl px-4 py-3 hover:shadow-lg transition">
+            <TiTick className="text-red-500 text-[22px]" />
+            <p className="text-gray-700">Experience other cultures</p>
           </div>
 
-          <div className="flex py-5 ">
-            <TiTick className="text-[22px] mr-3" />
-            <p>Create unforgettable memories</p>
+          <div className="flex items-center gap-3 bg-white shadow-md rounded-xl px-4 py-3 hover:shadow-lg transition">
+            <TiTick className="text-red-500 text-[22px]" />
+            <p className="text-gray-700">Create unforgettable memories</p>
           </div>
         </div>
       </div>

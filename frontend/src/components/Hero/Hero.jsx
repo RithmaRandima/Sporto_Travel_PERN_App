@@ -16,15 +16,25 @@ import "swiper/css";
 const Hero = () => {
   return (
     <div className="relative w-[100%] h-[65vh] md:h-[100vh] bg-white overflow-hidden">
+      {/* BACKGROUND GLOW (new, no layout change) */}
+      <div className="absolute inset-0">
+        <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-red-500/10 blur-[140px]" />
+        <div className="absolute bottom-[-200px] right-[-200px] w-[500px] h-[500px] bg-black/10 blur-[140px]" />
+      </div>
+
       {/* center text */}
-      <div className="absolute w-[100%] md:max-w-[500px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10 px-4">
-        <p className="heading-name text-[#f00] text-[17px] md:text-[30px] tracking-[2px]">
-          Travel Experiences!
+      <div className="absolute w-[100%] md:max-w-[500px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-20 px-4 text-center">
+        <p className="heading-name text-red-500 text-[17px] md:text-[30px] tracking-[4px] font-semibold">
+          Travel Experiences
         </p>
 
-        <h1 className="heading-name mx-auto text-black rotate-[-10deg] text-[100px] md:text-[210px] tracking-[1px] mt-[-30px] md:mt-[-80px] font-extrabold ">
+        <h1 className="heading-name mx-auto text-black rotate-[-10deg] text-[90px] md:text-[210px] tracking-[2px] mt-[-30px] md:mt-[-80px] font-extrabold drop-shadow-sm">
           Sporto
         </h1>
+
+        <p className="text-gray-500 text-sm md:text-base mt-2 max-w-md mx-auto">
+          Discover premium sports travel, adventures & global experiences.
+        </p>
       </div>
 
       {/* big left slider */}
@@ -38,7 +48,7 @@ const Hero = () => {
             <SwiperSlide key={index}>
               <img
                 src={img}
-                className="w-full h-[180px] md:h-[500px] object-cover"
+                className="w-full h-[180px] md:h-[500px] object-cover rounded-2xl shadow-lg"
                 alt=""
                 loading="lazy"
               />
@@ -68,7 +78,7 @@ const Hero = () => {
             <SwiperSlide key={index}>
               <img
                 src={img}
-                className="w-full h-[230px] object-cover"
+                className="w-full h-[230px] object-cover rounded-2xl shadow-md"
                 alt=""
                 loading="lazy"
               />
@@ -91,7 +101,7 @@ const Hero = () => {
       >
         <img
           src={heroRightBig[0]}
-          className="w-full h-[180px] md:h-[480px] object-cover"
+          className="w-full h-[180px] md:h-[480px] object-cover rounded-2xl shadow-xl"
           alt=""
           loading="lazy"
         />
@@ -111,7 +121,7 @@ const Hero = () => {
       >
         <img
           src={heroRightSmallRight[0]}
-          className="w-full h-[300px] object-cover"
+          className="w-full h-[300px] object-cover rounded-2xl shadow-lg"
           alt=""
           loading="lazy"
         />
@@ -128,7 +138,7 @@ const Hero = () => {
             <SwiperSlide key={index}>
               <img
                 src={img}
-                className="w-full h-[190px] object-cover"
+                className="w-full h-[190px] object-cover rounded-xl shadow-md"
                 alt=""
                 loading="lazy"
               />

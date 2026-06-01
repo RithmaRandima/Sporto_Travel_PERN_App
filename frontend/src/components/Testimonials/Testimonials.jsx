@@ -12,10 +12,19 @@ const Testimonials = () => {
     <div className="flex pt-10 flex-col h-[100%] m-auto w-full">
       {/* TITLE */}
       <div className="pt-10 px-2">
-        <h1 className="text-3xl md:text-5xl">
+        <p className="text-red-500 uppercase tracking-[6px] text-[14px] md:text-[16px] mb-3">
+          Testimonials
+        </p>
+
+        <h1 className="text-3xl md:text-5xl font-light leading-tight">
           Unforgettable Travel <br />
-          <span className="font-bold text-[#f00]"> Experiences</span>
+          <span className="font-extrabold text-red-500">Experiences</span>
         </h1>
+
+        <p className="text-gray-600 mx-auto mt-4 max-w-xl">
+          Hear from travelers who explored the world with us. Real stories, real
+          experiences, unforgettable memories.
+        </p>
       </div>
 
       {/* SWIPER (REPLACES SLICK) */}

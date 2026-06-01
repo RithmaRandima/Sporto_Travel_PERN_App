@@ -4,36 +4,46 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 
 const TestimonialsBox = (props) => {
   return (
-    <div className=" w-[90%] md:w-[99%] mx-auto h-[300px] m-2 mt-[55px] relative  p-4 py-5 shadow-[0_2px_4px_rgba(0,0,0,0.3)] rounded-[20px]">
+    <div className="relative w-[90%] md:w-[99%] mx-auto h-[320px] m-2 mt-[60px] p-5 py-6 rounded-[24px]  shadow-lg hover:shadow-2xl transition-all duration-500 bg-white group">
+      {/* soft glow background */}
+      <div className="absolute -top-10 -right-10 w-[120px] h-[120px] bg-red-500/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition" />
+      <div className="absolute -bottom-10 -left-10 w-[120px] h-[120px] bg-black/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition" />
+
       {/* userImg */}
-      <div className="absolute -top-[40px] w-[75px] h-[75px]  rounded-full overflow-hidden mx-auto shadow-sm shadow-black">
-        <img
-          src={props.img}
-          alt=""
-          className="w-[100%] h-[100%] object-cover"
-        />
+      <div className="absolute -top-[40px] left-6 w-[78px] h-[78px] rounded-full overflow-hidden shadow-lg border-4 border-white group-hover:scale-105 transition">
+        <img src={props.img} alt="" className="w-full h-full object-cover" />
       </div>
+
       {/* title */}
-      <h1 className="text-[17px] md:text-[20px] font-bold mt-7 cursor-pointer hover:text-[#f00] text-left">
+      <h1 className="text-[18px] md:text-[20px] font-bold mt-10 text-left text-gray-900 group-hover:text-red-500 transition">
         {props.title}
       </h1>
-      <div className="hidden md:flex w-[30%] text-[10px] items-center justify-between text-[#f00] mb-2 mx-auto md:ml-1 mt-2">
+
+      {/* stars */}
+      <div className="flex items-center gap-1 text-red-500 mt-2">
         <FaStar />
         <FaStar />
         <FaStar />
         <FaStar />
         <FaStar />
       </div>
-      {/* message */}
-      <RiDoubleQuotesL className="text-[23px] mt-4" />
-      <p className="font-[200] text-[13px] mb-1 text-left ">{props.message}</p>
 
-      <div className="flex items-center justify-between mt-5 gap-5">
-        <p className="text-[#f00] text-[12px] md:text-[14px] tracking-[2px]">
+      {/* quote icon */}
+      <RiDoubleQuotesL className="text-[28px] mt-4 text-red-500 opacity-70" />
+
+      {/* message */}
+      <p className="font-light text-[13px] md:text-[14px] text-gray-600 leading-6 mt-2">
+        {props.message}
+      </p>
+
+      {/* footer */}
+      <div className="flex items-center justify-between mt-6">
+        <p className="text-red-500 text-[13px] md:text-[14px] tracking-[2px] font-medium">
           {props.name}
         </p>
-        <p className="text-[15px] flex  items-center ">
-          <IoLocationSharp className="text-[18px] text-[#f00] mr-2" />{" "}
+
+        <p className="text-gray-700 text-[14px] flex items-center gap-1">
+          <IoLocationSharp className="text-[18px] text-red-500" />
           {props.city}
         </p>
       </div>
