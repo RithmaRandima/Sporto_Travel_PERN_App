@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import AboutUs from "../components/AboutUs/AboutUs";
+import AboutNewsLetter from "../components/AboutNewsLetter/AboutNewsLetter";
 
 const About = () => {
   return (
@@ -126,6 +127,8 @@ const About = () => {
           Contact Us
         </button>
       </div>
+
+      <AboutNewsLetter />
     </div>
   );
 };

@@ -1,13 +1,12 @@
-import React from "react";
 import { FaStar } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { RiDoubleQuotesL } from "react-icons/ri";
 
 const TestimonialsBox = (props) => {
   return (
-    <div className="w-[90%] md:w-[99%] mx-auto h-[350px] m-2 mt-[55px] relative bg-gradient-to-t from-[#000]/80 to-black/50 p-4 py-5 text-white">
+    <div className=" w-[90%] md:w-[99%] mx-auto h-[300px] m-2 mt-[55px] relative  p-4 py-5 shadow-[0_2px_4px_rgba(0,0,0,0.3)] rounded-[20px]">
       {/* userImg */}
-      <div className="w-[70px] h-[70px] bg-red-400 rounded-full overflow-hidden mx-auto shadow-sm shadow-white">
+      <div className="absolute -top-[40px] w-[75px] h-[75px]  rounded-full overflow-hidden mx-auto shadow-sm shadow-black">
         <img
           src={props.img}
           alt=""
@@ -15,7 +14,7 @@ const TestimonialsBox = (props) => {
         />
       </div>
       {/* title */}
-      <h1 className="text-[17px] md:text-[20px] font-bold mt-3 cursor-pointer hover:text-[#f00] text-left">
+      <h1 className="text-[17px] md:text-[20px] font-bold mt-7 cursor-pointer hover:text-[#f00] text-left">
         {props.title}
       </h1>
       <div className="hidden md:flex w-[30%] text-[10px] items-center justify-between text-[#f00] mb-2 mx-auto md:ml-1 mt-2">

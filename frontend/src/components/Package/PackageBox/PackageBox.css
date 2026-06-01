@@ -1,9 +1,0 @@
-.package-box:hover .destination-box-info {
-  top: 50%;
-  transform: translateX(-50%) translateY(-50%);
-}
-
-.package-box:hover button {
-  display: block;
-  margin: auto;
-}

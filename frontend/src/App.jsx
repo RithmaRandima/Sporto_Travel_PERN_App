@@ -8,13 +8,20 @@ import Packages from "./pages/Packages";
 import Destinations from "./pages/Destinations";
 import Blog from "./pages/Blog";
 import About from "./pages/About";
+import LoginPopup from "./components/LoginPopup/LoginPopup";
+import { useAppContext } from "./context/AppContext";
 
 const App = () => {
+  const { showLogin } = useAppContext();
+
   return (
     <div className="App">
       <BrowserRouter>
         <TopBar />
         <Navbar />
+
+        {showLogin && <LoginPopup />}
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/packages" element={<Packages />} />
@@ -22,6 +29,7 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
         </Routes>
+
         <Footer />
       </BrowserRouter>
     </div>

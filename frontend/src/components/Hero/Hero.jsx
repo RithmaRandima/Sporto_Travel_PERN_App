@@ -1,8 +1,5 @@
-import React from "react";
-
 import {
   heroLeftBig,
-  heroLeftLeftSmallTop,
   heroLeftSmall,
   heroRightBig,
   heroRightSmallLeft,
@@ -16,33 +13,18 @@ import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 
-const changeAutoPlaySpeed = (autoPlaySpeed) => {
-  return {
-    autoplayDelay: autoPlaySpeed,
-  };
-};
-
 const Hero = () => {
   return (
-    <div className="relative w-[100%] h-[80vh] md:h-[100vh] bg-white overflow-hidden">
+    <div className="relative w-[100%] h-[65vh] md:h-[100vh] bg-white overflow-hidden">
       {/* center text */}
-      <div className="absolute w-[100%] md:max-w-[500px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10">
-        <p className="heading-name text-[#f00] text-[17px] md:text-[25px] tracking-[2px]">
+      <div className="absolute w-[100%] md:max-w-[500px] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-10 px-4">
+        <p className="heading-name text-[#f00] text-[17px] md:text-[30px] tracking-[2px]">
           Travel Experiences!
         </p>
 
-        <h1 className="heading-name mx-auto text-black rotate-[-10deg] text-[100px] md:text-[150px] tracking-[10px] mt-[-30px] md:mt-[-50px] mb-6 font-extrabold">
-          Classy
+        <h1 className="heading-name mx-auto text-black rotate-[-10deg] text-[100px] md:text-[210px] tracking-[1px] mt-[-30px] md:mt-[-80px] font-extrabold ">
+          Sporto
         </h1>
-
-        <p className="heading-sub-name mb-5 text-[16px] md:text-[17px] w-[80%] tracking-[2px] md:w-[75%] md:mt-[-20px] mx-auto text-gray-500">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium
-          placeat <br /> ipsa sint explicabo sequi id.
-        </p>
-
-        <button className="hover:bg-black hover:scale-110 duration-300">
-          More Info
-        </button>
       </div>
 
       {/* big left slider */}
@@ -65,26 +47,6 @@ const Hero = () => {
         </Swiper>
       </div>
 
-      {/* left small top (static - no slider) */}
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 10,
-          delay: 0.2,
-        }}
-        className="hidden md:block absolute top-[80px] left-[250px] h-[250px] w-[200px]"
-      >
-        <img
-          src={heroLeftLeftSmallTop[0]}
-          className="w-full h-[250px] object-cover"
-          alt=""
-          loading="lazy"
-        />
-      </motion.div>
-
       {/* left small bottom slider */}
       <motion.div
         initial={{ opacity: 0, y: 100 }}
@@ -95,7 +57,7 @@ const Hero = () => {
           damping: 10,
           delay: 0.6,
         }}
-        className="hidden md:block absolute top-[390px] left-[130px] h-[230px] w-[370px]"
+        className="hidden md:block absolute top-[400px] left-[130px] h-[230px] w-[370px]"
       >
         <Swiper
           modules={[Autoplay]}

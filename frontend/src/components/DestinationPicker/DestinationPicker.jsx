@@ -1,4 +1,3 @@
-import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { AiOutlineBars } from "react-icons/ai";
@@ -6,83 +5,82 @@ import { motion } from "framer-motion";
 
 const DestinationPicker = () => {
   return (
-    <div className="h-[100%] md:h-[80vh] w-[100%] bg-gray-100 pb-10">
-      <div className="flex flex-col items-center text-center justify-center h-[40vh] px-7 w-[100%]">
-        <p className="sub-title text-[#f00] text-[17px] md:text-[22px] mb-3">
-          Choose your Trip
-        </p>
-        <h1 className="font-bold text-[32px] md:text-[37px] mb-2">
-          Start your Vacation Now
-        </h1>
-        <p className="leading-7 text-[16px] md:text-[17px] mb-3 md:w-[70%]">
-          Looking for your dream vacation destination but don't know where to
-          start? With the help of experienced and knowledgeable travel agents,
-          you can plan the trip of a lifetime with ease.
-        </p>
-      </div>
-
-      <div className="flex items-center justify-center  w-full h-[100%] md:h-[40vh] md:px-10">
+    <div className="w-full pb-10 md:pb-0 hidden md:flex justify-center">
+      <div className="w-[95%] md:w-full px-4 md:px-10">
         <motion.div
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 80 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{
             type: "spring",
-            stiffness: 100,
-            damping: 10,
-            delay: 0.2,
+            stiffness: 120,
+            damping: 14,
+            delay: 0.15,
           }}
-          className="flex flex-col md:flex-row items-center justify-between w-[90%] md:w-full gap-5 bg-white h-[100%] md:h-[130px] p-10 md:px-10 rounded-[20px]"
+          className="flex flex-col md:flex-row items-stretch justify-between gap-6 
+                 bg-white/70 backdrop-blur-xl border border-gray-200 mt-5  w-[94%] md:w-[100%] mx-auto
+                 shadow-[2px_2px_4px_rgba(0,0,0,0.2)] rounded-2xl p-6 md:p-8"
         >
-          <div className="flex items-center w-full font-sans">
-            <div>
-              <FaSearch className="text-red-700  text-[20px]  md:text-[35px] hover:text-black hover:-translate-y-1 duration-300" />
-            </div>
-            <div className="text-left ml-5">
-              <h1 className="text-[17px] md:text-[22px] font-extrabold">
+          {/* Search Field */}
+          <div className="flex items-center gap-4 w-full group">
+            <FaSearch className="text-red-600 text-2xl md:text-3xl transition group-hover:scale-110" />
+            <div className="flex flex-col w-full">
+              <label className="text-sm text-left md:text-base font-semibold text-gray-800">
                 Place
-              </h1>
+              </label>
               <input
                 type="text"
-                className="w-[100%] outline-0 p-1 placeholder-black/50 md:px-4"
-                placeholder="insert Keyword"
+                placeholder="Search places..."
+                className="w-full bg-transparent border-b border-gray-300 
+                       focus:border-red-600 outline-none py-2 
+                       placeholder:text-gray-400 transition"
               />
             </div>
           </div>
 
-          <div className="flex items-center  w-full font-sans">
-            <div>
-              <FaLocationDot className="text-red-700 text-[20px]  md:text-[35px] hover:text-black hover:-translate-y-1 duration-300" />
-            </div>
-            <div className="text-left ml-5">
-              <h1 className="text-[17px] md:text-[22px] font-extrabold">
+          {/* Destination */}
+          <div className="flex items-center gap-4 w-full group">
+            <FaLocationDot className="text-red-600 text-2xl md:text-3xl transition group-hover:scale-110" />
+            <div className="flex flex-col w-full">
+              <label className="text-sm text-left md:text-base font-semibold text-gray-800">
                 Destinations
-              </h1>
+              </label>
               <input
                 type="text"
-                className="w-[100%] outline-0 p-1 placeholder-black/50 md:px-4"
-                placeholder="insert Keyword"
+                placeholder="Where to?"
+                className="w-full bg-transparent border-b border-gray-300 
+                       focus:border-red-600 outline-none py-2 
+                       placeholder:text-gray-400 transition"
               />
             </div>
           </div>
 
-          <div className="flex items-center  w-full font-sans">
-            <div>
-              <AiOutlineBars className="text-red-700 text-[20px]  md:text-[35px] hover:text-black hover:-translate-y-1 duration-300" />
-            </div>
-            <div className="text-left ml-5">
-              <h1 className="text-[17px] md:text-[22px] font-extrabold">
+          {/* Typologies */}
+          <div className="flex items-center gap-4 w-full group">
+            <AiOutlineBars className="text-red-600 text-2xl md:text-3xl transition group-hover:scale-110" />
+            <div className="flex flex-col w-full">
+              <label className="text-sm md:text-base text-left font-semibold text-gray-800">
                 Typologies
-              </h1>
+              </label>
               <input
                 type="text"
-                className="w-[100%] outline-0 p-1 placeholder-black/50 md:px-4"
-                placeholder="insert Keyword"
+                placeholder="Type of travel..."
+                className="w-full bg-transparent border-b border-gray-300 
+                       focus:border-red-600 outline-none py-2 
+                       placeholder:text-gray-400 transition"
               />
             </div>
           </div>
 
-          <div className="flex items-center  w-full font-sans md:w-[220px] h-[80px]">
-            <button className="w-full md:w-[160px] bg-red-700 h-[50px] md:h-[50px] font-bold md:font-extrabold uppercase text-[16px] hover:bg-black hover:scale-75 duration-300">
+          {/* Button */}
+          <div className="flex items-center justify-center md:justify-end w-full md:w-[180px]">
+            <button
+              className="w-full md:w-[160px] h-[48px] 
+                     bg-gradient-to-r from-red-600 to-red-700 
+                     text-white font-semibold uppercase tracking-wide
+                     rounded-xl shadow-md
+                     hover:scale-105 hover:shadow-xl active:scale-95
+                     transition-all duration-300"
+            >
               Search
             </button>
           </div>
