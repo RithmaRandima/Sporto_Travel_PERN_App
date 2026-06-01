@@ -47,12 +47,13 @@ export const createTrip = async (req, res) => {
     country,
     duration_days,
     price,
-    image_url,
     description,
     difficulty,
     season,
     rating,
   } = req.body;
+
+  const image_url = req.file?.filename;
 
   if (!title || !sport || !location || !country || !duration_days || !price) {
     return res.status(400).json({

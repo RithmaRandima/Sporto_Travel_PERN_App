@@ -13,38 +13,38 @@ const ListProduct = () => {
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
-    // const fetchList = async () => {
-    //   try {
-    //     setLoading(true);
-    //     const response = await axios.get(
-    //       "http://localhost:4000/api/products/list",
-    //     );
-    //     if (response.data.success) {
-    //       setList(response.data.data);
-    //     } else {
-    //       toast.error("Failed to load products");
-    //     }
-    //   } catch (error) {
-    //     console.log(error);
-    //     toast.error("Something went wrong");
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-    // fetchList();
+    const fetchTrips = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get("http://localhost:3000/app/v1/trips");
+        if (response.data.success) {
+          setList(response.data.data);
+        } else {
+          toast.error("Failed to load products");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTrips();
   }, []);
+
+  console.log(list[0]?.title);
 
   // Filter + Search
   const filteredProducts = useMemo(() => {
     return list.filter((item) => {
-      const matchesSearch = item.name
+      const matchesSearch = item.title
         ?.toLowerCase()
         .includes(search.toLowerCase());
 
       const matchesFilter =
         filter === "all"
           ? true
-          : item.status?.toLowerCase() === filter.toLowerCase();
+          : item.sport?.toLowerCase() === filter.toLowerCase();
 
       return matchesSearch && matchesFilter;
     });

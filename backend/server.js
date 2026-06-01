@@ -16,11 +16,21 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(json());
-app.use(cors());
-app.use(helmet());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  }),
+);
 app.use(morgan("dev"));
 
 app.use("/app/v1/trips", tripsRouter);
+app.use("/uploads", express.static("upload/images"));
 
 const initDB = async () => {
   try {

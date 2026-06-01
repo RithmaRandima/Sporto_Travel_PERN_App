@@ -86,40 +86,40 @@ const AddProduct = () => {
   };
 
   const onSubmitHandler = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   setLoading(true);
-    //   const formData = new FormData();
-    //   Object.entries(data).forEach(([key, value]) => {
-    //     formData.append(key, value);
-    //   });
-    //   formData.append("sizes", JSON.stringify(selectedSizes));
-    //   Object.entries(images).forEach(([key, value]) => {
-    //     if (value) {
-    //       formData.append(key, value);
-    //     }
-    //   });
-    //   const response = await axios.post(
-    //     "http://localhost:4000/api/products/add",
-    //     formData,
-    //     {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     },
-    //   );
-    //   if (response.data.success) {
-    //     resetForm();
-    //     alert(response.data.message);
-    //   } else {
-    //     alert("Failed to add product");
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   alert("Something went wrong");
-    // } finally {
-    //   setLoading(false);
-    // }
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, value]) => {
+        formData.append(key, value);
+      });
+      formData.append("sizes", JSON.stringify(selectedSizes));
+      Object.entries(images).forEach(([key, value]) => {
+        if (value) {
+          formData.append(key, value);
+        }
+      });
+      const response = await axios.post(
+        "http://localhost:4000/api/products/add",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        },
+      );
+      if (response.data.success) {
+        resetForm();
+        alert(response.data.message);
+      } else {
+        alert("Failed to add product");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const ImageUploadBox = ({ id, file, large = false }) => (
