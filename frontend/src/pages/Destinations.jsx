@@ -9,7 +9,14 @@ import {
   FaMapMarkedAlt,
 } from "react-icons/fa";
 
-import { popularDestinationsPackages } from "../Data/DestinationData";
+import {
+  popularDestinationsPackages,
+  serviceBottomBoxData,
+} from "../Data/DestinationData";
+import CTASection from "../components/CTASection/CTASection";
+import heroBg from "../assets/img-rock-climbing.jpeg";
+import ServiceBoxBottom from "../components/ServiceBoxBottom/ServiceBoxBottom";
+import { serviceBottomData } from "../Data/serviceBottomData";
 
 const Destinations = () => {
   const stats = [
@@ -48,13 +55,13 @@ const Destinations = () => {
       <section
         className="relative min-h-[80vh] flex items-center justify-center"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600')",
+          backgroundImage: `url(${heroBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/60" />
+        {/* <div className="absolute inset-0 bg-black/60" /> */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
 
         <div className="relative z-10 text-center px-6 max-w-4xl">
           <p className="uppercase tracking-[8px] text-red-400 text-sm">
@@ -95,7 +102,7 @@ const Destinations = () => {
       </section>
 
       {/* STATS */}
-      <section className="max-w-7xl mx-auto px-6 -mt-16 relative z-20">
+      <section className="max-w-7xl mx-auto px-6 -mt-7 relative z-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((item, index) => (
             <div
@@ -192,6 +199,12 @@ const Destinations = () => {
         </div>
       </section>
 
+      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+        {serviceBottomData.map((item) => (
+          <ServiceBoxBottom props={item} />
+        ))}
+      </div>
+
       {/* WHY CHOOSE US */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-6">
@@ -228,19 +241,11 @@ const Destinations = () => {
       </section>
 
       {/* CTA */}
-      <section className="bg-red-500 py-24 text-center px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-white">
-          Ready For Your Next Adventure?
-        </h2>
-
-        <p className="text-white/90 mt-5 max-w-2xl mx-auto">
-          Discover extraordinary destinations and create unforgettable memories.
-        </p>
-
-        <button className="mt-8 bg-white text-red-500 px-8 py-4 rounded-full font-bold hover:scale-105 transition">
-          Start Planning
-        </button>
-      </section>
+      <CTASection
+        heading="Ready For Your Next Adventure?"
+        text="Discover extraordinary destinations and create unforgettable memories."
+        button=" Start Planning"
+      />
     </div>
   );
 };

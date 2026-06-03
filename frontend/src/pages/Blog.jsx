@@ -72,7 +72,8 @@ const Blog = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/70" />
+        {/* <div className="absolute inset-0 bg-black/70" /> */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}

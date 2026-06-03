@@ -1,56 +1,26 @@
-import React from "react";
 import { motion } from "framer-motion";
-import {
-  FaFutbol,
-  FaPlaneDeparture,
-  FaMountain,
-  FaShieldAlt,
-} from "react-icons/fa";
+import CTASection from "../components/CTASection/CTASection";
+import heroBg from "../assets/destination-package-1.jpeg";
+import StartsSection from "../components/StartsSection/StartsSection";
+import ValueSection from "../components/ValueSection/ValueSection";
+
+import story01 from "../assets/Hero-Right-Small.jpeg";
+import story02 from "../assets/destination-package-2.jpeg";
+import story03 from "../assets/img-kayaking.jpeg";
 
 const About = () => {
-  const stats = [
-    { value: "150+", label: "Sports Events Covered" },
-    { value: "25K+", label: "Happy Travelers" },
-    { value: "75+", label: "Countries Explored" },
-    { value: "12+", label: "Years Experience" },
-  ];
-
-  const values = [
-    {
-      icon: <FaMountain />,
-      title: "Adventure",
-      desc: "Experience thrilling destinations, outdoor activities, and unforgettable sports journeys.",
-    },
-    {
-      icon: <FaShieldAlt />,
-      title: "Trust",
-      desc: "Reliable bookings, secure travel planning, and dedicated support every step of the way.",
-    },
-    {
-      icon: <FaFutbol />,
-      title: "Passion",
-      desc: "Built by sports lovers who understand the excitement of traveling for major events.",
-    },
-    {
-      icon: <FaPlaneDeparture />,
-      title: "Excellence",
-      desc: "Delivering premium travel experiences with attention to every detail.",
-    },
-  ];
-
   return (
     <div className="w-full min-h-screen bg-white overflow-hidden">
       {/* HERO SECTION */}
       <section
         className="relative min-h-[90vh] flex items-center justify-center text-center px-6"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1469854523086-cc02fe5d880?w=1600')",
+          backgroundImage: `url(${heroBg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="absolute inset-0 bg-black/65"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-black/20"></div>
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -116,7 +86,7 @@ const About = () => {
           className="overflow-hidden rounded-3xl shadow-2xl"
         >
           <img
-            src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1200"
+            src={story01}
             alt="Sports Travel"
             className="w-full h-[500px] object-cover hover:scale-110 transition duration-700"
           />
@@ -134,7 +104,7 @@ const About = () => {
             className="overflow-hidden rounded-3xl shadow-2xl"
           >
             <img
-              src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?w=1200"
+              src={story02}
               alt="Fans"
               className="w-full h-[500px] object-cover hover:scale-110 transition duration-700"
             />
@@ -204,7 +174,7 @@ const About = () => {
           className="overflow-hidden rounded-3xl shadow-2xl"
         >
           <img
-            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200"
+            src={story03}
             alt="Adventure"
             className="w-full h-[500px] object-cover hover:scale-110 transition duration-700"
           />
@@ -212,79 +182,17 @@ const About = () => {
       </section>
 
       {/* STATS SECTION */}
-      <section className="bg-gradient-to-r from-black via-gray-900 to-black py-24">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((item, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ y: -10 }}
-              className="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-8 text-center"
-            >
-              <h3 className="text-5xl font-bold text-red-500">{item.value}</h3>
-
-              <p className="text-gray-300 mt-3">{item.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <StartsSection />
 
       {/* VALUES SECTION */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <p className="text-red-500 uppercase tracking-widest font-semibold">
-            Core Values
-          </p>
-
-          <h2 className="text-4xl md:text-5xl font-bold mt-4">
-            What We Stand For
-          </h2>
-
-          <p className="text-gray-600 max-w-2xl mx-auto mt-6">
-            Our values guide every journey we create and every traveler we
-            serve.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {values.map((item, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ y: -10 }}
-              className="bg-white border rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300"
-            >
-              <div className="w-16 h-16 rounded-full bg-red-100 text-red-500 flex items-center justify-center text-2xl mb-6">
-                {item.icon}
-              </div>
-
-              <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-
-              <p className="text-gray-600 leading-7">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+      <ValueSection />
 
       {/* CTA SECTION */}
-      <section className="relative bg-red-500 py-24 px-6 text-center overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10">
-          <div className="w-full h-full bg-[radial-gradient(circle,white_1px,transparent_1px)] bg-[length:30px_30px]" />
-        </div>
-
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-white">
-            Ready For Your Next Adventure?
-          </h2>
-
-          <p className="mt-6 text-white/90 text-lg">
-            Join thousands of travelers who trust us to deliver unforgettable
-            sports and travel experiences around the world.
-          </p>
-
-          <button className="mt-10 bg-white text-red-500 px-8 py-4 rounded-full font-bold hover:scale-105 transition">
-            Contact Us Today
-          </button>
-        </div>
-      </section>
+      <CTASection
+        heading="Ready For Your Next Adventure?"
+        text="Join thousands of travelers who trust us to deliver unforgettable sports and travel experiences around the world."
+        button="Contact Us Today"
+      />
     </div>
   );
 };

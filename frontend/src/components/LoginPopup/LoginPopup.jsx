@@ -1,11 +1,10 @@
-import React, { useState, useContext } from "react";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useAppContext } from "../../context/AppContext";
-// import { StoreContext } from "../../context/StoreContext";
-// import axios from "axios";
+import defaultProfile from "../../assets/big-left-3.jpeg";
+import { Camera } from "lucide-react";
 
 const LoginPopup = () => {
-  // const { url, setToken, setUser, setShowLogin } = useContext(StoreContext);
   const { setShowLogin } = useAppContext();
 
   const [currentState, setCurrentState] = useState("Login");
@@ -15,6 +14,8 @@ const LoginPopup = () => {
     name: "",
     email: "",
     password: "",
+    bio: "",
+    profileImage: null,
   });
 
   const onChangeHandeler = (event) => {
@@ -24,30 +25,16 @@ const LoginPopup = () => {
     }));
   };
 
+  const onImageChange = (event) => {
+    setData((prev) => ({
+      ...prev,
+      profileImage: event.target.files[0],
+    }));
+  };
+
   const onLogin = async (event) => {
-    // event.preventDefault();
-    // setLoading(true);
-    // try {
-    //   const endpoint =
-    //     currentState === "Login"
-    //       ? `${url}/api/user/login`
-    //       : `${url}/api/user/register`;
-    //   const response = await axios.post(endpoint, data);
-    //   if (response.data.success) {
-    //     setToken(response.data.token);
-    //     setUser(response.data.user);
-    //     localStorage.setItem("token", response.data.token);
-    //     localStorage.setItem("user", JSON.stringify(response.data.user));
-    //     setShowLogin(false);
-    //   } else {
-    //     alert(response.data.message);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    //   alert("Something went wrong");
-    // } finally {
-    //   setLoading(false);
-    // }
+    event.preventDefault();
+    console.log(data);
   };
 
   return (
@@ -83,7 +70,6 @@ const LoginPopup = () => {
             hover:scale-110 transition
             text-gray-400 hover:text-black
           "
-          // onClick={() => setShowLogin(false)}
           onClick={() => setShowLogin(false)}
         />
 
@@ -96,25 +82,78 @@ const LoginPopup = () => {
           <p className="text-xs text-gray-500 mt-1">Welcome back to YumRush</p>
         </div>
 
-        {/* NAME */}
+        {/* SIGN UP ONLY FIELDS */}
         {currentState === "Sign Up" && (
-          <input
-            type="text"
-            name="name"
-            placeholder="Your name"
-            value={data.name}
-            onChange={onChangeHandeler}
-            className="
-              p-3 rounded-xl
-              bg-[#ffffff]
-          shadow-[0_1px_2px_rgba(0,0,0,0.25)]
-          border border-neutral-200
-              outline-none
-              text-sm
-              w-full
-            "
-            required
-          />
+          <>
+            <div className="flex items-center gap-3">
+              {/* PROFILE IMAGE */}
+              <div className="relative -mt-5">
+                <label htmlFor="profileImage" className="cursor-pointer">
+                  <img
+                    src={
+                      data.profileImage
+                        ? URL.createObjectURL(data.profileImage)
+                        : defaultProfile
+                    }
+                    alt="Profile"
+                    className="w-29 h-21.5 rounded-full object-cover border-2 border-neutral-300 shadow-md hover:opacity-80 transition"
+                  />
+                </label>
+
+                <div className="absolute bottom-0 right-2 p-1 rounded-full border-black bg-white shadow-[0_2px_2px_rgba(0,0,0,0.4)]">
+                  <Camera size={18} />
+                </div>
+
+                <input
+                  id="profileImage"
+                  type="file"
+                  accept="image/*"
+                  onChange={onImageChange}
+                  className="hidden"
+                  required
+                />
+              </div>
+
+              {/* NAME */}
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                value={data.name}
+                onChange={onChangeHandeler}
+                className="
+                p-3 rounded-xl
+                bg-[#ffffff]
+                shadow-[0_1px_2px_rgba(0,0,0,0.25)]
+                border border-neutral-200
+                outline-none
+                text-sm
+                w-full
+              "
+                required
+              />
+            </div>
+
+            {/* BIO */}
+            <textarea
+              name="bio"
+              placeholder="Tell us about yourself"
+              value={data.bio}
+              onChange={onChangeHandeler}
+              rows={4}
+              className="
+                p-3 rounded-xl
+                bg-[#ffffff]
+                shadow-[0_1px_2px_rgba(0,0,0,0.25)]
+                border border-neutral-200
+                outline-none
+                text-sm
+                w-full
+                resize-none
+              "
+              required
+            />
+          </>
         )}
 
         {/* EMAIL */}
@@ -125,13 +164,13 @@ const LoginPopup = () => {
           value={data.email}
           onChange={onChangeHandeler}
           className="
-          p-3 rounded-xl
-          bg-[#ffffff]
-          shadow-[0_1px_2px_rgba(0,0,0,0.25)]
-          border border-neutral-200
-          outline-none
-          text-sm
-          w-full
+            p-3 rounded-xl
+            bg-[#ffffff]
+            shadow-[0_1px_2px_rgba(0,0,0,0.25)]
+            border border-neutral-200
+            outline-none
+            text-sm
+            w-full
           "
           required
         />
@@ -146,8 +185,8 @@ const LoginPopup = () => {
           className="
             p-3 rounded-xl
             bg-[#ffffff]
-          shadow-[0_1px_2px_rgba(0,0,0,0.25)]
-          border border-neutral-200
+            shadow-[0_1px_2px_rgba(0,0,0,0.25)]
+            border border-neutral-200
             outline-none
             text-sm
             w-full

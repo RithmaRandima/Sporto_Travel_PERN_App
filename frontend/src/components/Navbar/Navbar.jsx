@@ -3,8 +3,10 @@ import Sidebar from "../SideBar/Sidebar";
 import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Settings, CalendarDays, LogOut, ChevronRight } from "lucide-react";
 
 const Navbar = () => {
+  const [user, setUser] = useState(false);
   const { navStatus, setNavStatus, sideBar, setShowLogin, setSideBar } =
     useAppContext();
 
@@ -97,24 +99,96 @@ const Navbar = () => {
       </div>
 
       {/* social section */}
-      <div className="flex items-center gap-4">
-        <button
-          onClick={() => setShowLogin(true)}
-          className="
-    hidden md:block
-    px-4 py-1
-    bg-[#f00]
-    text-white
-    font-medium
-    rounded-full
-    shadow-[0_2px_12px_rgba(255,0,0,0.35)]
-    hover:bg-red-700
-    transition-all
-    duration-200
-  "
-        >
-          Login
-        </button>
+      <div className="flex items-center gap-3 md:gap-4">
+        {user ? (
+          <div className="relative group">
+            {/* Avatar */}
+            <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center text-white font-bold text-[15px] md:text-[16px] shadow-lg shadow-red-500/30">
+              HK
+            </div>
+            {/* Dropdown */}
+            <div className="absolute right-0 top-14 w-75 overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.12)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+              {/* Top Accent */}
+              <div className="h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500" />
+
+              {/* User Info */}
+              <div className="p-5 border-b border-gray-100">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-red-200">
+                    HK
+                  </div>
+
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-gray-900 text-base truncate">
+                      {user.name}
+                    </h3>
+
+                    <p className="text-sm text-gray-500 truncate">
+                      {user.email}
+                    </p>
+
+                    <span className="inline-flex mt-2 px-2.5 py-1 rounded-full bg-red-50 text-red-600 text-xs font-medium">
+                      Verified Account
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Menu */}
+              <div className="p-2">
+                <a
+                  href="/settings"
+                  className="group/item flex items-center justify-between px-4 py-3 rounded-xl hover:bg-red-50 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <Settings size={18} className="text-red-500" />
+                    <span className="font-medium text-gray-800">Settings</span>
+                  </div>
+
+                  <ChevronRight
+                    size={16}
+                    className="text-gray-400 group-hover/item:text-red-500 transition"
+                  />
+                </a>
+
+                <a
+                  href="/bookings"
+                  className="group/item flex items-center justify-between px-4 py-3 rounded-xl hover:bg-red-50 transition-all duration-200"
+                >
+                  <div className="flex items-center gap-3">
+                    <CalendarDays size={18} className="text-red-500" />
+                    <span className="font-medium text-gray-800">
+                      My Bookings
+                    </span>
+                  </div>
+
+                  <ChevronRight
+                    size={16}
+                    className="text-gray-400 group-hover/item:text-red-500 transition"
+                  />
+                </a>
+              </div>
+
+              {/* Footer */}
+              <div className="border-t border-gray-100 p-2">
+                <button
+                  // onClick={handleLogout}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-600 hover:bg-red-50 transition-all duration-200"
+                >
+                  <LogOut size={18} />
+                  <span className="font-medium">Logout</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => setShowLogin(true)}
+            className="hidden md:block px-4 py-1 bg-[#f00] text-white font-medium rounded-full shadow-[0_2px_12px_rgba(255,0,0,0.35)] hover:bg-red-700 transition-all duration-200"
+          >
+            Login
+          </button>
+        )}
         <div
           className={sideBar === true ? " text-[#f00] cursor-pointer" : " "}
           onClick={() => setSideBar(!sideBar)}

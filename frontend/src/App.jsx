@@ -10,6 +10,7 @@ import Blog from "./pages/Blog";
 import About from "./pages/About";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import { useAppContext } from "./context/AppContext";
+import TripDetails from "./pages/TripDetails";
 
 const App = () => {
   const { showLogin } = useAppContext();
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/destinations" element={<Destinations />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/about" element={<About />} />
+          <Route path="/trips/:id" element={<TripDetails />} />
         </Routes>
 
         <Footer />
