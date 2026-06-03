@@ -101,9 +101,20 @@ export const register = async (req, res) => {
       RETURNING *
     `;
 
+    const token = jwt.sign(
+      {
+        userId: newUser[0].id,
+        email: newUser[0].email,
+        role: newUser[0].role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" },
+    );
+
     res.status(201).json({
       success: true,
       message: "User created successfully",
+      token,
       user: newUser[0],
     });
   } catch (error) {

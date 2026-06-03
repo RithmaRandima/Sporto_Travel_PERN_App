@@ -11,7 +11,7 @@ import About from "./pages/About";
 import LoginPopup from "./components/LoginPopup/LoginPopup";
 import { useAppContext } from "./context/AppContext";
 import TripDetails from "./pages/TripDetails";
-
+import { Toaster } from "react-hot-toast";
 const App = () => {
   const { showLogin } = useAppContext();
 
@@ -34,6 +34,7 @@ const App = () => {
 
         <Footer />
       </BrowserRouter>
+      <Toaster />
     </div>
   );
 };

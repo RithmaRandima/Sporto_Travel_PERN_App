@@ -3,9 +3,11 @@ import { IoClose } from "react-icons/io5";
 import { useAppContext } from "../../context/AppContext";
 import defaultProfile from "../../assets/big-left-3.jpeg";
 import { Camera } from "lucide-react";
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const LoginPopup = () => {
-  const { setShowLogin } = useAppContext();
+  const { setShowLogin, setToken, setUser, url } = useAppContext();
 
   const [currentState, setCurrentState] = useState("Login");
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,55 @@ const LoginPopup = () => {
 
   const onLogin = async (event) => {
     event.preventDefault();
-    console.log(data);
+    setLoading(true);
+
+    try {
+      const endpoint =
+        currentState === "Login"
+          ? `${url}/app/v1/users/login`
+          : `${url}/app/v1/users/register`;
+
+      let res;
+
+      // 🔥 LOGIN (JSON)
+      if (currentState === "Login") {
+        res = await axios.post(endpoint, {
+          email: data.email,
+          password: data.password,
+        });
+      }
+
+      // 🔥 REGISTER (FORMDATA)
+      else {
+        const formData = new FormData();
+
+        formData.append("name", data.name);
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+        formData.append("bio", data.bio);
+        formData.append("image", data.profileImage);
+
+        res = await axios.post(endpoint, formData);
+      }
+
+      if (res.data.success) {
+        setToken(res.data.token);
+        setUser(res.data.user);
+
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        setShowLogin(false);
+        toast.success(res.data.message);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      console.log(error.response?.data || error);
+      toast.error(error.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
