@@ -6,6 +6,7 @@ import helmet from "helmet";
 
 import { neon } from "@neondatabase/serverless";
 import tripsRouter from "./routes/tripsRoutes.js";
+import usersRouter from "./routes/userRoutes.js";
 import morgan from "morgan";
 
 import { sql } from "./config/db.js";
@@ -29,8 +30,9 @@ app.use(
 );
 app.use(morgan("dev"));
 
-app.use("/app/v1/trips", tripsRouter);
 app.use("/uploads", express.static("upload/images"));
+app.use("/app/v1/trips", tripsRouter);
+app.use("/app/v1/users", usersRouter);
 
 const initDB = async () => {
   try {
