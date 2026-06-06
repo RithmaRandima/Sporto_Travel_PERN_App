@@ -7,6 +7,7 @@ import helmet from "helmet";
 import { neon } from "@neondatabase/serverless";
 import tripsRouter from "./routes/tripsRoutes.js";
 import usersRouter from "./routes/userRoutes.js";
+import bookingsRouter from "./routes/bookingsRoutes.js";
 import morgan from "morgan";
 
 import { sql } from "./config/db.js";
@@ -33,6 +34,7 @@ app.use(morgan("dev"));
 app.use("/uploads", express.static("upload/images"));
 app.use("/app/v1/trips", tripsRouter);
 app.use("/app/v1/users", usersRouter);
+app.use("/app/v1/bookings", bookingsRouter);
 
 const initDB = async () => {
   try {
@@ -43,10 +45,18 @@ const initDB = async () => {
   }
 };
 
-initDB().then(() => {
-  setupDB();
-  // routes
-  app.listen(PORT, () => {
-    console.log("Server running on PORT ", PORT);
-  });
-});
+async function startServer() {
+  try {
+    await initDB();
+    // await setupDB();
+
+    app.listen(PORT, () => {
+      console.log("Server running on PORT", PORT);
+    });
+  } catch (err) {
+    console.error("Startup failed:", err);
+    process.exit(1);
+  }
+}
+
+startServer();

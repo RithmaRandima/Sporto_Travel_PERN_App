@@ -1,25 +1,52 @@
 import { useParams, Link } from "react-router-dom";
-import { useState } from "react";
-import { serviceBottomData } from "../Data/serviceBottomData";
+import { useEffect, useState } from "react";
 import { FaClock, FaLocationDot } from "react-icons/fa6";
+import toast from "react-hot-toast";
+import { useAppContext } from "../context/AppContext";
+import axios from "axios";
+import { FaStar } from "react-icons/fa";
 
 const TripDetails = () => {
   const { id } = useParams();
+  const [trip, setTrip] = useState({});
 
-  const trip = serviceBottomData.find((item) => item.id === Number(id));
+  const { url, user, setLoading, loading } = useAppContext();
+
+  useEffect(() => {
+    const fetchTrips = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${url}/app/v1/trips/${id}`);
+        if (response.data.success) {
+          setTrip(response.data.data);
+        } else {
+          toast.error("Failed to load products");
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchTrips();
+  }, [id]);
+
+  console.log(trip);
 
   const [bookingData, setBookingData] = useState({
     date: "",
     travelerType: "Solo",
     adults: 1,
     children: 0,
-    fullName: "",
-    email: "",
-    phone: "",
-    specialRequests: "",
     transportation: "",
     accommodation: "",
+    phone: "",
+    specialRequests: "",
   });
+
+  console.log(trip);
+  console.log(user);
 
   const onBookingChange = (e) => {
     setBookingData((prev) => ({
@@ -41,12 +68,25 @@ const TripDetails = () => {
     );
   }
 
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          {/* Spinner */}
+          <div className="w-12 h-12 border-4 border-gray-200 border-t-red-500 rounded-full animate-spin"></div>
+
+          <p className="text-gray-500 text-sm">Loading trip details...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white min-h-screen">
       {/* HERO IMAGE (UNCHANGED) */}
       <div className="relative h-[70vh] w-full overflow-hidden">
         <img
-          src={trip.img}
+          src={`http://localhost:3000/uploads/${trip.image_url}`}
           alt={trip.city}
           className="h-full w-full object-cover"
         />
@@ -67,78 +107,82 @@ const TripDetails = () => {
       <div className="max-w-7xl mx-auto px-5 py-14">
         <div className="grid lg:grid-cols-[1fr_380px] gap-10">
           {/* LEFT SIDE (UNCHANGED CONTENT) */}
+          {/* LEFT */}
           <div>
-            <div className="mb-10">
-              <span className="text-red-500 font-semibold uppercase tracking-wider text-sm">
-                Explore Destination
+            {/* HEADER */}
+            <div className="mb-12">
+              <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-red-50 text-red-600 text-xs font-semibold tracking-wide">
+                ✈️ Explore Destination
               </span>
 
-              <h2 className="text-4xl font-bold text-gray-900 mt-2">
-                About {trip.city}
+              <h2 className="text-4xl font-bold text-gray-900 mt-4">
+                {trip.city}, {trip.country}
               </h2>
 
-              <p className="mt-5 text-gray-600 leading-8 text-lg">
-                {trip.description}
-              </p>
-            </div>
+              <div className="flex items-center gap-3 mt-3 text-gray-500 text-sm">
+                <span className="px-3 py-1 bg-gray-100 rounded-full">
+                  {trip.sport}
+                </span>
 
-            {/* TRIP HIGHLIGHTS */}
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div className="bg-white border border-gray-100 shadow-sm rounded-2xl p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center">
-                    <FaClock className="text-red-500 text-xl" />
-                  </div>
+                <span className="px-3 py-1 bg-gray-100 rounded-full">
+                  {trip.difficulty}
+                </span>
 
-                  <div>
-                    <p className="text-sm text-gray-500">Duration</p>
-                    <h3 className="font-bold text-lg">{trip.days}</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white border border-gray-100 shadow-sm rounded-2xl p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center">
-                    <span className="text-green-600 font-bold text-lg">%</span>
-                  </div>
-
-                  <div>
-                    <p className="text-sm text-gray-500">Discount</p>
-                    <h3 className="font-bold text-lg text-green-600">
-                      {trip.discount}
-                    </h3>
-                  </div>
-                </div>
+                <span className="px-3 py-1 bg-gray-100 rounded-full">
+                  {trip.season}
+                </span>
               </div>
             </div>
 
-            {/* EXPERIENCE SECTION */}
-            <div className="mt-12">
-              <h3 className="text-2xl font-bold mb-4">
-                Why You'll Love This Trip
-              </h3>
+            {/* DESCRIPTION */}
+            <p className="text-gray-600 leading-8 text-lg mb-12">
+              {trip.description}
+            </p>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <div className="p-5 rounded-2xl bg-gray-50">
-                  ✈️ Premium travel experience
-                </div>
+            {/* STATS CARDS */}
+            <div className="grid grid-cols-2 gap-5">
+              <div className="p-5 rounded-2xl bg-white border shadow-sm hover:shadow-md transition">
+                <p className="text-xs text-gray-400 uppercase">Duration</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">
+                  {trip.duration_days}{" "}
+                  <span className="text-sm font-medium">days</span>
+                </p>
+              </div>
 
-                <div className="p-5 rounded-2xl bg-gray-50">
-                  🏨 Comfortable accommodation
-                </div>
+              <div className="p-5 rounded-2xl bg-white border shadow-sm hover:shadow-md transition">
+                <p className="text-xs text-gray-400 uppercase">Rating</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">
+                  ⭐ {trip.rating}
+                </p>
+              </div>
 
-                <div className="p-5 rounded-2xl bg-gray-50">
-                  📍 Top tourist attractions included
-                </div>
+              <div className="p-5 rounded-2xl bg-white border shadow-sm hover:shadow-md transition">
+                <p className="text-xs text-gray-400 uppercase">Max Guests</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">
+                  {trip.max_people || "∞"}
+                </p>
+              </div>
 
-                <div className="p-5 rounded-2xl bg-gray-50">
-                  🎉 Local culture & activities
-                </div>
+              <div className="p-5 rounded-2xl bg-white border shadow-sm hover:shadow-md transition">
+                <p className="text-xs text-gray-400 uppercase">Experience</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">
+                  {trip.featured ? "⭐ Featured" : "Standard"}
+                </p>
               </div>
             </div>
+
+            {/* HIGHLIGHT STRIP */}
+            {trip.featured && (
+              <div className="mt-10 p-5 rounded-2xl bg-gradient-to-r from-blue-50 to-cyan-50 border border-blue-100">
+                <p className="text-blue-600 font-semibold">
+                  ✨ Premium Curated Experience
+                </p>
+                <p className="text-sm text-gray-600 mt-1">
+                  Handpicked trip designed for unforgettable travel moments.
+                </p>
+              </div>
+            )}
           </div>
-
           {/* RIGHT SIDE - BOOKING FORM */}
           <div className="sticky top-8 h-fit">
             <div className="bg-white border border-gray-200 shadow-2xl rounded-3xl overflow-hidden">
@@ -276,34 +320,6 @@ const TripDetails = () => {
                       </label>
                     ))}
                   </div>
-                </div>
-
-                {/* NAME */}
-                <div>
-                  <label className="block text-left text-xs text-gray-500 uppercase mb-1">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    value={bookingData.fullName}
-                    onChange={onBookingChange}
-                    className="w-full p-3 border border-gray-200 rounded-xl focus:border-red-500 outline-none"
-                  />
-                </div>
-
-                {/* EMAIL */}
-                <div>
-                  <label className="block text-left text-xs text-gray-500 uppercase mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={bookingData.email}
-                    onChange={onBookingChange}
-                    className="w-full p-3 border border-gray-200 rounded-xl focus:border-red-500 outline-none"
-                  />
                 </div>
 
                 {/* PHONE */}

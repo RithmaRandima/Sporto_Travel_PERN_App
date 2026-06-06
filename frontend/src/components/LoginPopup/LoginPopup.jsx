@@ -168,7 +168,7 @@ const LoginPopup = () => {
               <input
                 type="text"
                 name="name"
-                placeholder="Your name"
+                placeholder="Your Full name"
                 value={data.name}
                 onChange={onChangeHandeler}
                 className="

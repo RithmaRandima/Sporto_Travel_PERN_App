@@ -15,8 +15,8 @@ import {
 } from "../Data/DestinationData";
 import CTASection from "../components/CTASection/CTASection";
 import heroBg from "../assets/img-rock-climbing.jpeg";
-import ServiceBoxBottom from "../components/ServiceBoxBottom/ServiceBoxBottom";
-import { serviceBottomData } from "../Data/serviceBottomData";
+import { useAppContext } from "../context/AppContext";
+import TravelBox from "../components/TravelBox/TravelBox";
 
 const Destinations = () => {
   const stats = [
@@ -48,6 +48,8 @@ const Destinations = () => {
       desc: "Travel to major sporting events worldwide.",
     },
   ];
+
+  const { trips } = useAppContext();
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -143,67 +145,31 @@ const Destinations = () => {
       </section>
 
       {/* DESTINATIONS */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
-        <div className="text-center mb-14">
-          <h2 className="text-4xl font-bold">Popular Destinations</h2>
+      {/* DESTINATIONS */}
+      <section className="max-w-7xl mx-auto px-6 py-16 ">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="inline-block px-4 py-1.5 mb-4 text-sm font-medium text-[#f00] bg-blue-50 rounded-full">
+            Top Picks
+          </span>
 
-          <p className="text-gray-600 mt-4">
-            Handpicked destinations loved by travelers.
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+            Popular Destinations
+          </h2>
+
+          <p className="mt-5 text-lg text-gray-600 leading-relaxed">
+            Discover breathtaking places, vibrant cultures, and unforgettable
+            experiences in destinations loved by travelers worldwide.
           </p>
+
+          <div className="w-24 h-1 bg-[#f00] rounded-full mx-auto mt-6"></div>
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-          {popularDestinationsPackages.map((item, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ y: -8 }}
-              className="break-inside-avoid bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition"
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={item.img}
-                  alt={item.city}
-                  className="w-full object-cover hover:scale-110 transition duration-700"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-
-                <div className="absolute top-4 left-4 bg-red-500 text-white px-3 py-1 rounded-full text-sm">
-                  {item.days} Days
-                </div>
-
-                <div className="absolute bottom-4 left-4 text-white">
-                  <h3 className="text-2xl font-bold">{item.city}</h3>
-                </div>
-              </div>
-
-              <div className="p-6">
-                <p className="font-semibold text-gray-800">{item.title}</p>
-
-                <p className="text-gray-600 mt-3 line-clamp-3">
-                  {item.description}
-                </p>
-
-                <div className="flex items-center justify-between mt-6">
-                  <span className="text-red-500 font-bold text-lg">
-                    {item.price}
-                  </span>
-
-                  <button className="bg-black text-white px-5 py-2 rounded-full hover:bg-red-500 transition">
-                    View Details
-                  </button>
-                </div>
-              </div>
-            </motion.div>
+        <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 space-y6">
+          {trips.map((item) => (
+            <TravelBox key={item.id} props={item} />
           ))}
         </div>
       </section>
-
-      <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-        {serviceBottomData.map((item) => (
-          <ServiceBoxBottom props={item} />
-        ))}
-      </div>
 
       {/* WHY CHOOSE US */}
       <section className="bg-white py-24">

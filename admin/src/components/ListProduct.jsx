@@ -32,8 +32,6 @@ const ListProduct = () => {
     fetchTrips();
   }, []);
 
-  console.log(list[0]?.title);
-
   // Filter + Search
   const filteredProducts = useMemo(() => {
     return list.filter((item) => {

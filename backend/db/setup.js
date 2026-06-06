@@ -1,3 +1,4 @@
+import { createBookingsTable } from "./bookings.js";
 import { createTrips } from "./trips.js";
 import { createUsersTable } from "./user.js";
 
@@ -7,6 +8,7 @@ export async function setupDB() {
 
     await createTrips();
     await createUsersTable();
+    await createBookingsTable();
 
     console.log("All tables created successfully");
   } catch (err) {

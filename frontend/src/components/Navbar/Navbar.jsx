@@ -2,7 +2,6 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import Sidebar from "../SideBar/Sidebar";
 import { useAppContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
-import { use, useState } from "react";
 import { Settings, CalendarDays, LogOut, ChevronRight } from "lucide-react";
 
 const Navbar = () => {
@@ -16,8 +15,6 @@ const Navbar = () => {
     token,
     user,
   } = useAppContext();
-
-  console.log(user);
 
   return (
     <div className="sticky top-[0px] z-[100] flex justify-between items-center  w-full bg-white shadow-lg px-6 py-3 pb-4 md:py-0 md:pb-0">
@@ -112,7 +109,7 @@ const Navbar = () => {
         {token ? (
           <div className="relative group">
             {/* Avatar */}
-            <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center text-white font-bold text-[15px] md:text-[16px] shadow-lg shadow-red-500/30">
+            <div className="w-9 h-9 md:w-11 md:h-11 rounded-full bg-gradient-to-br from-red-400 to-red-500 flex items-center justify-center text-white font-bold text-[15px] md:text-[16px] shadow-lg shadow-black/30">
               <img
                 src={`http://localhost:3000/uploads/${user.image_url}`}
                 alt="Profile"
@@ -120,14 +117,14 @@ const Navbar = () => {
               />
             </div>
             {/* Dropdown */}
-            <div className="absolute right-0 top-14 w-75 overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.12)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+            <div className="absolute right-0 top-14 w-70 overflow-hidden rounded-2xl bg-white border border-gray-100 shadow-[0_20px_50px_rgba(0,0,0,0.12)] opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
               {/* Top Accent */}
               <div className="h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-500" />
 
               {/* User Info */}
               <div className="p-5 border-b border-gray-100">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-red-200">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-black/30">
                     <img
                       src={`http://localhost:3000/uploads/${user.image_url}`}
                       alt="Profile"
